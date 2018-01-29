@@ -47,7 +47,7 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
 };
 
 if ('geolocation' in navigator) {
-    navigator.geolocation.getAccurateCurrentPosition(posSuccess, posError, posCoords, { maxWait: 5000, desiredAccuracy: 20 });
+    navigator.geolocation.getAccurateCurrentPosition(posSuccess, posError, posCoords, { maxWait: 7000, desiredAccuracy: 10 });
 } else {
     $('error').text('Not suport')
 }
