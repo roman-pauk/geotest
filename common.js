@@ -1,3 +1,4 @@
+/*
 navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess, geolocationError, geoprogress, options) {
     var lastCheckedPosition,
         locationEventCount = 0,
@@ -45,9 +46,13 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
     watchID = navigator.geolocation.watchPosition(checkLocation, onError, options);
     timerID = setTimeout(stopTrying, options.maxWait); // Set a timeout that will abandon the location loop
 };
+*/
+
+
 
 if ('geolocation' in navigator) {
-    navigator.geolocation.getAccurateCurrentPosition(posSuccess, posError, posCoords, { maxWait: 7000, desiredAccuracy: 10 });
+    //navigator.geolocation.getAccurateCurrentPosition(posSuccess, posError, posCoords, { maxWait: 7000, desiredAccuracy: 10 });
+    navigator.geolocation.watchPosition(posCoords, posError, { enableHighAccuracy: true })
 } else {
     $('error').text('Not suport')
 }
@@ -57,6 +62,7 @@ if ('geolocation' in navigator) {
 
 function posSuccess(pos) {
     $('#success').text(pos.coords.accuracy);
+    console.log(pos);
 }
 function posError(pos) {
     $('error').text('Error');
@@ -65,4 +71,5 @@ function posCoords(pos) {
     $('#progres').text(pos.coords.accuracy);
     $('#lt').text(pos.coords.latitude);
     $('#lg').text(pos.coords.longitude);
+    console.log(pos);
 }
