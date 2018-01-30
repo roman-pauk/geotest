@@ -1,4 +1,4 @@
-/*
+﻿/*
 navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess, geolocationError, geoprogress, options) {
     var lastCheckedPosition,
         locationEventCount = 0,
@@ -48,7 +48,8 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
 };
 */
 
-
+var counter = 0;
+var stratPoint = [];
 
 if ('geolocation' in navigator) {
     //navigator.geolocation.getAccurateCurrentPosition(posSuccess, posError, posCoords, { maxWait: 7000, desiredAccuracy: 10 });
@@ -75,18 +76,43 @@ function posCoords(pos) {
     $('#altitude').text(pos.coords.altitude ? pos.coords.altitude : 'not support');
     console.log(pos);
 
-    //map.map.setCenter(new google.maps.LatLng(45, 19));
     setPosOnce(lt, lg);
+
+    $('#distance').text(calculateDistance(lt, lg));
 
     var latlng = new google.maps.LatLng(lt, lg);
     m.setPosition(latlng);
     
 }
-var counter = 0;
+
 function setPosOnce(lt, lg) {
     if (counter == 0) {
         myMap.setCenter(new google.maps.LatLng(lt, lg));
+
+        stratPoint = [lt, lg];
+
         marker.setPosition(new google.maps.LatLng(lt, lg));
         counter++;
     } 
+}
+
+function calculateDistance(lt, lg) {
+    var slt = stratPoint[0],
+        slg = stratPoint[1];
+    var R = 6371e3; // metres
+    var φ1 = toRadians(slt);
+    var φ2 = toRadians(lt);
+    var Δφ = toRadians(slt - lt);
+    var Δλ = toRadians(slg - lg);
+
+    var a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+        Math.cos(φ1) * Math.cos(φ2) *
+        Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    return R * c;
+}
+
+function toRadians(r) {
+    return r * Math.PI / 180;
 }

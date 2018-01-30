@@ -14,7 +14,8 @@
 
     <h4>Positions: lt: <span id="lt"></span>  lg: <span id="lg"></span></h4>
 
-    <h4>Altitude: <span id="altitude"></span></h4>
+    <h4>Altitude: <span id="altitude">0</span></h4>
+    <h4> Distance: <span id="distance">1</span>m</h4>
 
     <h2 id="error"></h2>
 
@@ -36,7 +37,7 @@
                 map: myMap,
                 title: 'You are here'
             });
-            navigator.geolocation.watchPosition(posCoords, posError, { enableHighAccuracy: true, maximumAge: 1000 });
+            navigator.geolocation.watchPosition(posCoords, posError, { enableHighAccuracy: true, maximumAge: 500 });
         }
     </script>
     <script async defer
