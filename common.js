@@ -52,7 +52,7 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
 
 if ('geolocation' in navigator) {
     //navigator.geolocation.getAccurateCurrentPosition(posSuccess, posError, posCoords, { maxWait: 7000, desiredAccuracy: 10 });
-    navigator.geolocation.watchPosition(posCoords, posError, { enableHighAccuracy: true })
+    navigator.geolocation.watchPosition(posCoords, posError, { enableHighAccuracy: true, maximumAge: 500 })
 } else {
     $('error').text('Not suport')
 }
@@ -71,5 +71,11 @@ function posCoords(pos) {
     $('#progres').text(pos.coords.accuracy);
     $('#lt').text(pos.coords.latitude);
     $('#lg').text(pos.coords.longitude);
+
+    if (pos.coords.altitude) {
+        $('body').append(`<h4>Altitude: ${pos.coords.altitude}</h4>`);
+    } else {
+        $('body').append(`<h4>Altitude not support</h4>`);
+    }
     console.log(pos);
 }
