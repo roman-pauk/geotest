@@ -74,8 +74,18 @@ function posCoords(pos) {
 
     $('#altitude').text(pos.coords.altitude ? pos.coords.altitude : 'not support');
     console.log(pos);
-    
+
+    //map.map.setCenter(new google.maps.LatLng(45, 19));
+    setPosOnce(lt, lg);
+
     var latlng = new google.maps.LatLng(lt, lg);
     m.setPosition(latlng);
     
+}
+var counter = 0;
+function setPosOnce(lt, lg) {
+    if (counter == 0) {
+        myMap.setCenter(new google.maps.LatLng(lt, lg));
+        counter++;
+    } 
 }

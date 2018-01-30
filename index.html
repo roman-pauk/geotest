@@ -21,20 +21,19 @@
 
     <div id="map" style="height: 300px;"></div>
     <script>
-        var map, m;
+        var myMap, m;
         function initMap() {
-            var uluru = { lat: 49.677734699999995, lng: 24.184109499999998 };
-            map = new google.maps.Map(document.getElementById('map'), {
+            var uluru = { lat: 50, lng: 25 };
+            myMap = new google.maps.Map(document.getElementById('map'), {
                 zoom: 20,
                 center: uluru
             });
             var marker = new google.maps.Marker({
                 position: uluru,
-                map: map
+                map: myMap
             });
             m = new google.maps.Marker({
-                position: uluru,
-                map: map,
+                map: myMap,
                 title: 'You are here'
             });
             navigator.geolocation.watchPosition(posCoords, posError, { enableHighAccuracy: true, maximumAge: 1000 });
