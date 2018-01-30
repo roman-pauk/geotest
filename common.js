@@ -58,10 +58,6 @@ if ('geolocation' in navigator) {
     $('error').text('Not suport')
 }
 
-function posSuccess(pos) {
-    $('#success').text(pos.coords.accuracy);
-    console.log(pos);
-}
 function posError(pos) {
     $('error').text('Error');
 }
@@ -70,11 +66,11 @@ function posCoords(pos) {
         lg = pos.coords.longitude;
 
     $('#progres').text(pos.coords.accuracy);
-    $('#lt').text(lt);
-    $('#lg').text(lg);
+    $('#lt').text(lt.toFixed(2));
+    $('#lg').text(lg.toFixed(2));
 
-    $('#altitude').text(pos.coords.altitude ? pos.coords.altitude : 'not support');
-    console.log(pos);
+    $('#altitude').text(pos.coords.altitude ? pos.coords.altitude + 'm' : 'not support');
+    //console.log(pos);
 
     setPosOnce(lt, lg);
 
@@ -110,7 +106,7 @@ function calculateDistance(lt, lg) {
         Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-    return R * c;
+    return Math.abs(Math.round(R * c));
 }
 
 function toRadians(r) {
