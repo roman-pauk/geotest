@@ -21,16 +21,16 @@
 
     <div id="map" style="height: 300px;"></div>
     <script>
-        var myMap, m;
+        var myMap, marker, m;
         function initMap() {
-            var uluru = { lat: 50, lng: 25 };
+            //var uluru = { lat: 50, lng: 25 };
             myMap = new google.maps.Map(document.getElementById('map'), {
-                zoom: 20,
-                center: uluru
+                zoom: 20
             });
-            var marker = new google.maps.Marker({
-                position: uluru,
-                map: myMap
+            marker = new google.maps.Marker({
+                //position: uluru,
+                map: myMap,
+                title: 'Start position'
             });
             m = new google.maps.Marker({
                 map: myMap,

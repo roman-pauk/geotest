@@ -86,6 +86,7 @@ var counter = 0;
 function setPosOnce(lt, lg) {
     if (counter == 0) {
         myMap.setCenter(new google.maps.LatLng(lt, lg));
+        marker.setPosition(new google.maps.LatLng(lt, lg));
         counter++;
     } 
 }
