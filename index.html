@@ -19,6 +19,32 @@
     <h2 id="error"></h2>
 
 
+    <div id="map" style="height: 300px;"></div>
+    <script>
+        var map, m;
+        function initMap() {
+            var uluru = { lat: 49.677734699999995, lng: 24.184109499999998 };
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 20,
+                center: uluru
+            });
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map
+            });
+            m = new google.maps.Marker({
+                position: uluru,
+                map: map,
+                title: 'You are here'
+            });
+            navigator.geolocation.watchPosition(posCoords, posError, { enableHighAccuracy: true, maximumAge: 1000 });
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4MvF_KA5DtdtAS_DnVa_09KVBEZAKhBo&callback=initMap">
+    </script>
+
+
 
 
     <script src="jquery.js"></script>

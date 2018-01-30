@@ -52,13 +52,10 @@ navigator.geolocation.getAccurateCurrentPosition = function (geolocationSuccess,
 
 if ('geolocation' in navigator) {
     //navigator.geolocation.getAccurateCurrentPosition(posSuccess, posError, posCoords, { maxWait: 7000, desiredAccuracy: 10 });
-    navigator.geolocation.watchPosition(posCoords, posError, { enableHighAccuracy: true, maximumAge: 500 })
+    //navigator.geolocation.watchPosition(posCoords, posError, { enableHighAccuracy: true, maximumAge: 1000 });
 } else {
     $('error').text('Not suport')
 }
-
-
-
 
 function posSuccess(pos) {
     $('#success').text(pos.coords.accuracy);
@@ -68,10 +65,17 @@ function posError(pos) {
     $('error').text('Error');
 }
 function posCoords(pos) {
+    var lt = pos.coords.latitude,
+        lg = pos.coords.longitude;
+
     $('#progres').text(pos.coords.accuracy);
-    $('#lt').text(pos.coords.latitude);
-    $('#lg').text(pos.coords.longitude);
+    $('#lt').text(lt);
+    $('#lg').text(lg);
 
     $('#altitude').text(pos.coords.altitude ? pos.coords.altitude : 'not support');
     console.log(pos);
+    
+    var latlng = new google.maps.LatLng(lt, lg);
+    m.setPosition(latlng);
+    
 }
