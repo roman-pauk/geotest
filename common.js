@@ -72,10 +72,6 @@ function posCoords(pos) {
     $('#lt').text(pos.coords.latitude);
     $('#lg').text(pos.coords.longitude);
 
-    if (pos.coords.altitude) {
-        $('body').append(`<h4>Altitude: ${pos.coords.altitude}</h4>`);
-    } else {
-        $('body').append(`<h4>Altitude not support</h4>`);
-    }
+    $('#altitude').text(pos.coords.altitude ? pos.coords.altitude : 'not support');
     console.log(pos);
 }
